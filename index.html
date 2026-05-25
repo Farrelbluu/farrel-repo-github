@@ -10,41 +10,45 @@
        ============================================================ -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- ============================================================
        ICONS (Lucide via CDN)
        ============================================================ -->
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
 
   <style>
     /* ============================================================
        CSS VARIABLES — Edit colors, fonts, and sizes here
        ============================================================ */
     :root {
-      --bg-base:        #060c18;       /* deepest background */
-      --bg-surface:     #0b1526;       /* card / section backgrounds */
-      --bg-glass:       rgba(11,21,38,0.7); /* glassmorphism fill */
-      --navy:           #0f2044;       /* mid-tone navy */
-      --slate:          #1c2e4a;       /* borders, dividers */
-      --cyan:           #00e5ff;       /* primary accent */
-      --cyan-dim:       rgba(0,229,255,0.12); /* tinted backgrounds */
-      --cyan-glow:      rgba(0,229,255,0.25);
-      --text-primary:   #e8f0fe;
-      --text-secondary: #7a9bc4;
-      --text-muted:     #3d5a80;
+  --bg-base:        #f6f6f2;
+  --bg-surface:     #ffffff;
+  --bg-glass:       rgba(255,255,255,0.78);
 
-      --font-display:   'Syne', sans-serif;
-      --font-mono:      'Share Tech Mono', monospace;
-      --font-body:      'DM Sans', sans-serif;
+  --navy:           #efefe9;
+  --slate:          #d9d9d2;
 
-      --radius-sm:      6px;
-      --radius-md:      14px;
-      --radius-lg:      22px;
+  --accent:         #111111;
+  --accent-soft:    rgba(0,0,0,0.06);
+  --accent-glow:    rgba(0,0,0,0.10);
 
-      --transition:     0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      --blur:           blur(18px);
-    }
+  --text-primary:   #111111;
+  --text-secondary: #3d3d3d;
+  --text-muted:     #787878;
+  --text-on-dark:   #ffffff;
+
+  --font-display: 'Clash Display', sans-serif;
+--font-mono: 'JetBrains Mono', monospace;
+--font-body: 'Inter', sans-serif;
+
+  --radius-sm:      6px;
+  --radius-md:      14px;
+  --radius-lg:      22px;
+
+  --transition:     0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --blur:           blur(18px);
+}
 
     /* ============================================================
        RESET & BASE
@@ -68,34 +72,63 @@
        BACKGROUND GRID TEXTURE
        ============================================================ */
     body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--slate) 1px, transparent 1px),
-        linear-gradient(90deg, var(--slate) 1px, transparent 1px);
-      background-size: 60px 60px;
-      opacity: 0.08;
-      pointer-events: none;
-      z-index: 0;
-    }
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.75) 22%, transparent 50%),
+    radial-gradient(circle at 15% 75%, rgba(0,0,0,0.04) 0%, transparent 28%),
+    radial-gradient(circle at 85% 30%, rgba(0,0,0,0.03) 0%, transparent 25%);
+  pointer-events: none;
+  z-index: 0;
+}
 
     /* ============================================================
        NAVIGATION
        ============================================================ */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 clamp(1.5rem, 5vw, 4rem);
-      height: 64px;
-      background: rgba(6,12,24,0.8);
-      backdrop-filter: var(--blur);
-      border-bottom: 1px solid var(--slate);
-    }
+  nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+  height: 64px;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: var(--blur);
+  border-bottom: 1px solid var(--slate);
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+}
+
+.nav-links a {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color var(--transition);
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--accent);
+  transition: width var(--transition);
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
 
     .nav-logo {
       font-family: var(--font-mono);
@@ -158,14 +191,14 @@
       padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 8vw, 8rem);
     }
 
-    .section-label {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--cyan);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
+   .section-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
 
     .section-title {
       font-family: var(--font-display);
@@ -175,12 +208,13 @@
       margin-bottom: 1rem;
     }
 
-    .section-divider {
-      width: 48px; height: 3px;
-      background: var(--cyan);
-      border-radius: 2px;
-      margin-bottom: 3rem;
-    }
+  .section-divider {
+  width: 48px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  margin-bottom: 3rem;
+}
 
     /* ============================================================
        BUTTONS
@@ -200,36 +234,61 @@
       letter-spacing: 0.04em;
     }
 
-    .btn-primary {
-      background: var(--cyan);
-      color: #060c18;
-    }
-    .btn-primary:hover {
-      background: #fff;
-      box-shadow: 0 0 24px var(--cyan-glow);
-      transform: translateY(-2px);
-    }
+    .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  letter-spacing: 0.04em;
+}
 
-    .btn-outline {
-      background: transparent;
-      color: var(--cyan);
-      border: 1px solid var(--cyan);
-    }
-    .btn-outline:hover {
-      background: var(--cyan-dim);
-      box-shadow: 0 0 18px var(--cyan-glow);
-      transform: translateY(-2px);
-    }
+.btn-primary {
+  background: var(--accent);
+  color: var(--text-on-dark);
+}
+
+.btn-primary i {
+  color: var(--text-on-dark);
+}
+
+.btn-primary:hover {
+  background: #222222;
+  color: #ffffff;
+  box-shadow: 0 0 24px var(--accent-glow);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--text-primary);
+}
+
+.btn-outline i {
+  color: var(--text-primary);
+}
+
+.btn-outline:hover {
+  background: rgba(0,0,0,0.05);
+  transform: translateY(-2px);
+}
 
     /* ============================================================
        GLASS CARD UTILITY
        ============================================================ */
     .glass {
-      background: var(--bg-glass);
-      backdrop-filter: var(--blur);
-      border: 1px solid var(--slate);
-      border-radius: var(--radius-md);
-    }
+  background: var(--bg-glass);
+  backdrop-filter: var(--blur);
+  border: 1px solid var(--slate);
+  border-radius: var(--radius-md);
+}
 
     /* ============================================================
        HERO SECTION
@@ -277,18 +336,18 @@
     @keyframes blink { 50% { opacity: 0; } }
 
     .hero-name {
-      font-family: var(--font-display);
-      font-size: clamp(3rem, 7vw, 5.5rem);
-      font-weight: 800;
-      line-height: 1.0;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.6rem;
-    }
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+  margin-bottom: 1rem;
+}
 
     .hero-name .highlight {
-      color: var(--cyan);
-      text-shadow: 0 0 40px var(--cyan-glow);
-    }
+  color: var(--accent);
+  text-shadow: none;
+}
 
     .hero-title {
       font-family: var(--font-mono);
@@ -322,35 +381,34 @@
       position: relative;
       flex-shrink: 0;
     }
+.hero-photo {
+  width: clamp(180px, 22vw, 280px);
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-lg);
+  background: #ffffff;
+  border: 2px solid var(--slate);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
 
-    .hero-photo {
-      width: clamp(180px, 22vw, 280px);
-      aspect-ratio: 1;
-      border-radius: var(--radius-lg);
-      background: var(--navy);
-      border: 2px solid var(--slate);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      color: var(--text-muted);
-      font-size: 0.75rem;
-      font-family: var(--font-mono);
-      overflow: hidden;
-      position: relative;
-  
-    }
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
 
-    /* Cyan corner accent lines */
-    .hero-photo::before,
-    .hero-photo::after {
-      content: '';
-      position: absolute;
-      width: 28px; height: 28px;
-      border-color: var(--cyan);
-      border-style: solid;
-    }
+.hero-photo::before,
+.hero-photo::after {
+  content: '';
+  position: absolute;
+  width: 28px; height: 28px;
+  border-color: var(--accent);
+  border-style: solid;
+}
     .hero-photo::before { top: 12px; left: 12px; border-width: 2px 0 0 2px; }
     .hero-photo::after  { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
 
@@ -508,7 +566,24 @@
       position: relative;
       overflow: hidden;
     }
+    
+    .project-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.4rem;
+  border: 1px solid var(--slate);
+  background: #f2f2ee;
+}
 
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+    
     /* Gradient overlay on hover */
     .project-card::before {
       content: '';
@@ -651,49 +726,84 @@
        ============================================================ */
     #contact { background: var(--bg-surface); }
 
-    .contact-inner {
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
-    }
+    #contact {
+  background: var(--bg-surface);
+}
 
-    .contact-lead {
-      color: var(--text-secondary);
-      max-width: 520px;
-      margin: 0 auto 3rem;
-      line-height: 1.8;
-    }
+.contact-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
 
+.contact-lead {
+  color: var(--text-secondary);
+  max-width: 620px;
+  margin: 0 auto 3rem;
+  line-height: 1.8;
+}
+
+.contact-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+  padding: 1.1rem 1.2rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--slate);
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: var(--blur);
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+
+.contact-link:hover {
+  border-color: var(--accent);
+  background: #ffffff;
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.08);
+}
+
+.contact-link .icon,
+.contact-link .icon {
+  width: 26px;
+  height: 26px;
+  color: var(--accent);
+  flex-shrink: 0;
+  display: block;
+}
+
+.contact-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.15rem;
+}
+
+.contact-link strong {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
     .contact-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-bottom: 3rem;
-    }
+  grid-template-columns: 1fr;
+}
 
-    .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 1rem 1.6rem;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--slate);
-      background: var(--bg-glass);
-      backdrop-filter: var(--blur);
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      transition: var(--transition);
-      cursor: pointer;
-    }
-    .contact-link:hover {
-      border-color: var(--cyan);
-      color: var(--cyan);
-      background: var(--cyan-dim);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px var(--cyan-glow);
-    }
-    .contact-link .icon { color: var(--cyan); }
+.contact-link {
+  justify-content: flex-start;
+}
 
     /* ============================================================
        FOOTER
@@ -766,7 +876,21 @@
       .hero-photo-wrap { order: -1; margin: 0 auto; }
       .hero-actions { justify-content: center; }
       .hero-bio { margin: 0 auto 2.5rem; }
-      .hero-badge { left: 50%; transform: translateX(-50%); }
+      .hero-badge {
+  position: absolute;
+  bottom: -65px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent);
+  white-space: nowrap;
+  box-shadow: 0 0 20px var(--accent-glow);
+}
 
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .about-stats { grid-template-columns: 1fr 1fr; }
@@ -788,7 +912,7 @@
        NAVIGATION
        ============================================================ -->
   <nav>
-    <div class="nav-logo">FAR.portfolio</div>
+    <div class="nav-logo">Farrel.dev</div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">Tentang</a></li>
       <li><a href="#skills">Keahlian</a></li>
@@ -865,10 +989,10 @@
         <div class="section-divider"></div>
         <!-- EDIT: Ringkasan profesional Anda -->
         <p>
-          Saya seorang siswa SMK Poncol Jakarta yang memiliki minat di bidang teknologi dan pengelolaan data. Saya memiliki ketertarikan dalam IT Support, manajemen database, serta data entry, dan saat ini saya terus mengembangkan kemampuan tersebut melalui pembelajaran mandiri dan berbagai proyek pribadi. 
+          Saya seorang siswa SMK Poncol Jakarta yang memiliki minat di bidang teknologi dan pengelolaan data. Saya memiliki ketertarikan dalam IT Support, serta data entry, dan saat ini saya terus mengembangkan kemampuan tersebut melalui pembelajaran mandiri dan berbagai proyek pribadi. 
         </p>
         <p>
-          Saya terbiasa mempelajari troubleshooting perangkat komputer, instalasi sistem operasi, pengolahan data, hingga dasar-dasar pengelolaan jaringan dan database.
+          Saya terbiasa mempelajari troubleshooting perangkat komputer, pengolahan data, hingga dasar-dasar pembelajaran mandiri tentang excel dan juga word.
         </p>
         <p>
           Sebagai pelajar, saya terus berusaha meningkatkan kemampuan teknis maupun pengalaman kerja agar dapat berkembang dan beradaptasi di dunia industri teknologi.
@@ -878,19 +1002,19 @@
       <!-- EDIT: Update numbers to match your actual experience -->
       <div class="about-stats reveal-stagger">
         <div class="stat-card glass">
-          <div class="stat-number">1.5+</div>
-          <div class="stat-label">Tahun Pengalaman</div>
+          <div class="stat-number">6+</div>
+          <div class="stat-label">Bulan Pengalaman</div>
         </div>
         <div class="stat-card glass">
-          <div class="stat-number">3+</div>
+          <div class="stat-number">2</div>
           <div class="stat-label">Proyek Ditangani</div>
         </div>
         <div class="stat-card glass">
-          <div class="stat-number">80%</div>
+          <div class="stat-number">50%</div>
           <div class="stat-label">Akurasi Data</div>
         </div>
         <div class="stat-card glass">
-          <div class="stat-number">2+</div>
+          <div class="stat-number">1+</div>
           <div class="stat-label">Sistem Dipelihara</div>
         </div>
       </div>
@@ -915,7 +1039,7 @@
         <div class="skill-icon"><i data-lucide="monitor" width="20" height="20"></i></div>
         <div>
           <div class="skill-name">IT Support</div>
-          <div class="skill-level">Menengah</div>
+          <div class="skill-level">Pemula</div>
         </div>
       </div>
 
@@ -923,57 +1047,10 @@
         <div class="skill-icon"><i data-lucide="table-2" width="20" height="20"></i></div>
         <div>
           <div class="skill-name">Data Entry</div>
-          <div class="skill-level">Menengah</div>
-        </div>
-      </div>
-
-      <div class="skill-card glass">
-        <div class="skill-icon"><i data-lucide="database" width="20" height="20"></i></div>
-        <div>
-          <div class="skill-name">Manajemen Basis Data</div>
-          <div class="skill-level">Menengah</div>
-        </div>
-      </div>
-
-      <div class="skill-card glass">
-        <div class="skill-icon"><i data-lucide="code-2" width="20" height="20"></i></div>
-        <div>
-          <div class="skill-name">SQL</div>
-          <div class="skill-level">Menengah</div>
-        </div>
-      </div>
-
-      <div class="skill-card glass">
-        <div class="skill-icon"><i data-lucide="search-check" width="20" height="20"></i></div>
-        <div>
-          <div class="skill-name">Pemecahan Masalah</div>
-          <div class="skill-level">Lanjutan</div>
-        </div>
-      </div>
-
-      <div class="skill-card glass">
-        <div class="skill-icon"><i data-lucide="network" width="20" height="20"></i></div>
-        <div>
-          <div class="skill-name">Dasar Jaringan</div>
-          <div class="skill-level">Menengah</div>
-        </div>
-      </div>
-
-      <div class="skill-card glass">
-        <div class="skill-icon"><i data-lucide="laptop" width="20" height="20"></i></div>
-        <div>
-          <div class="skill-name">Instalasi Windows</div>
           <div class="skill-level">Pemula</div>
         </div>
       </div>
 
-      <div class="skill-card glass">
-        <div class="skill-icon"><i data-lucide="wrench" width="20" height="20"></i></div>
-        <div>
-          <div class="skill-name">Perangkat Keras & Lunak</div>
-          <div class="skill-level">Menengah</div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -990,32 +1067,42 @@
     </div>
 
     <div class="projects-grid reveal-stagger">
-      <!-- PROYEK 1 -->
-      <div class="project-card glass">
-        <div class="project-tag">Perangkat Lunak · Pemeliharaan</div>
-        <div class="project-title">Projek HTML,CSS,JS untuk demonstrasi akhir Tahun Pembelajaran 2025/2026</div>
-        <p class="project-desc">
-          Membuat sebuah Website Design Untuk di Perkenalkan Pada Demonstrasi RPL Di SMK PONCOL Jakarta. Pada Tanggal 1-3 Desember 2025.
-        </p>
-        <div class="project-chips">
-          <span class="chip">Interaktif</span>
-          <span class="chip">Komunikatif</span>
-          <span class="chip">Informatif</span>
-        </div>
-      </div>
+  <!-- PROYEK 1 -->
+  <div class="project-card glass">
+    <div class="project-image">
+      <img src="assets/dokumentasi.jpg" alt="Dokumentasi Projek HTML CSS JS">
+    </div>
 
-      <!-- PROYEK 2 -->
-      <div class="project-card glass">
-        <div class="project-tag">Python & Flask</div>
-        <div class="project-title">Membuat Sistem Deteksi Wajah Dan Gestur tangan menggunakan Bahasa Pemograman Python</div>
-        <p class="project-desc">
-          Merancang Dan membangun sistem gestur tangan serta wajah menggunakan opencv dan juga mediapipe untuk dijadikan wadah projek ini.
-        </p>
-        <div class="project-chips">
-          <span class="chip">Python</span>
-          <span class="chip">Mediapipe</span>
-          <span class="chip">OpenCV</span>
-        </div>
+    <div class="project-tag">Perangkat Lunak · Pemeliharaan</div>
+    <div class="project-title">Projek HTML,CSS,JS untuk demonstrasi akhir Tahun Pembelajaran 2025/2026</div>
+    <p class="project-desc">
+      Membuat sebuah Website Design Untuk di Perkenalkan Pada Demonstrasi RPL Di SMK PONCOL Jakarta. Pada Tanggal 1-3 Desember 2025.
+    </p>
+    <div class="project-chips">
+      <span class="chip">Interaktif</span>
+      <span class="chip">Komunikatif</span>
+      <span class="chip">Informatif</span>
+    </div>
+  </div>
+
+  <!-- PROYEK 2 -->
+  <div class="project-card glass">
+    <div class="project-image">
+      <img src="assets/dokumentasi2.jpg" alt="Dokumentasi Projek Python Deteksi Wajah dan Gestur">
+    </div>
+
+    <div class="project-tag">Python & Flask</div>
+    <div class="project-title">Membuat Sistem Deteksi Wajah Dan Gestur tangan menggunakan Bahasa Pemograman Python</div>
+    <p class="project-desc">
+      Merancang Dan membangun sistem gestur tangan serta wajah menggunakan opencv dan juga mediapipe untuk dijadikan wadah projek ini.
+    </p>
+    <div class="project-chips">
+      <span class="chip">Python</span>
+      <span class="chip">Mediapipe</span>
+      <span class="chip">OpenCV</span>
+    </div>
+  </div>
+</div>
       </div>
   </section>
 
@@ -1037,12 +1124,12 @@
         <div class="portfolio-thumb">
           <div class="portfolio-thumb-icon">
             <i data-lucide="database" width="40" height="40"></i>
-            <span>Sistem Basis Data</span>
+            <span>Data Entry</span>
           </div>
         </div>
         <div class="portfolio-info">
-          <div class="portfolio-title">Sistem DB Inventaris</div>
-          <div class="portfolio-sub">MySQL · SQL Server · 2025</div>
+          <div class="portfolio-title">Manajement Data</div>
+          <div class="portfolio-sub">Excel 2026</div>
         </div>
       </div>
 
@@ -1051,28 +1138,15 @@
         <div class="portfolio-thumb">
           <div class="portfolio-thumb-icon">
             <i data-lucide="network" width="40" height="40"></i>
-            <span>IT Support</span>
+            <span>Manajement Computer</span>
           </div>
         </div>
         <div class="portfolio-info">
-          <div class="portfolio-title">IT Support</div>
-          <div class="portfolio-sub">I TECH · 2025</div>
+          <div class="portfolio-title">Troubleshoot Computer</div>
+          <div class="portfolio-sub">Troubleshooting · 2026</div>
         </div>
       </div>
 
-      <!-- KARTU PORTOFOLIO 4 -->
-      <div class="portfolio-card">
-        <div class="portfolio-thumb">
-          <div class="portfolio-thumb-icon">
-            <i data-lucide="wrench" width="40" height="40"></i>
-            <span>Pemeliharaan Database</span>
-          </div>
-        </div>
-        <div class="portfolio-info">
-          <div class="portfolio-title">Program Pemeliharaan Database</div>
-          <div class="portfolio-sub">Basis Data · MySQL · 2026</div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -1091,38 +1165,69 @@
       </p>
 
       <div class="contact-links reveal-stagger">
-        <!-- EDIT: Replace href values with your actual details -->
-        <a class="contact-link" href="mailto:alex.morgan@email.com">
-          <i data-lucide="mail" width="20" height="20" class="icon"></i>
-          <span>farrel.personal.acc@gmail.com</span>
-        </a>
+        <!-- ============================================================
+     CONTACT SECTION
+     ============================================================ -->
+<section id="contact">
+  <div class="contact-inner">
+    <p class="section-label reveal">// Kontak</p>
+    <h2 class="section-title reveal">Mari Terhubung</h2>
+    <div class="section-divider reveal" style="margin:1rem auto 2rem;"></div>
 
-        <!-- EDIT: Replace +1234567890 with your WhatsApp number (international format, no spaces) -->
-        <a class="contact-link" href="https://wa.me/1234567890" target="_blank" rel="noopener">
-          <i data-lucide="message-circle" width="20" height="20" class="icon"></i>
-          <span>WhatsApp</span>
-        </a>
+    <p class="contact-lead reveal">
+      Terbuka untuk peluang IT Support, Data Entry, Serta Troubleshooting.
+      Silakan hubungi saya melalui kontak di bawah ini.
+    </p>
 
-        <!-- EDIT: Replace #linkedin with your LinkedIn profile URL -->
-        <a class="contact-link" href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">
-          <i data-lucide="linkedin" width="20" height="20" class="icon"></i>
-          <span>LinkedIn</span>
-        </a>
+    <a class="contact-link" href="mailto:farrel.personal.acc@gmail.com">
+  <svg class="icon" viewBox="0 0 24 24" fill="none">
+    <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+  </svg>
+  <div>
+    <span class="contact-label">Email</span>
+    <strong>farrel.personal.acc@gmail.com</strong>
+  </div>
+</a>
 
-        <!-- EDIT: Replace #github with your GitHub profile URL -->
-        <a class="contact-link" href="https://github.com/yourusername" target="_blank" rel="noopener">
-          <i data-lucide="github" width="20" height="20" class="icon"></i>
-          <span>GitHub</span>
-        </a>
-      </div>
+      <a class="contact-link" href="https://wa.me/6281234567890" target="_blank" rel="noopener">
+  <svg class="icon" viewBox="0 0 24 24" fill="none">
+    <path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-5.1A8.5 8.5 0 1 1 21 11.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M8 10h.01M12 10h.01M16 10h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  </svg>
+  <div>
+    <span class="contact-label">WhatsApp</span>
+    <strong>Hubungi via WhatsApp</strong>
+  </div>
+</a>
 
-      <!-- Tombol CTA opsional -->
-      <a class="btn btn-primary reveal" href="mailto:alex.morgan@email.com">
-        <i data-lucide="send" width="16" height="16"></i>
-        Kirim Pesan
-      </a>
+      <a class="contact-link" href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">
+  <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M6.94 8.75H3.75V20h3.19V8.75ZM5.35 4A1.85 1.85 0 1 0 5.35 7.7A1.85 1.85 0 0 0 5.35 4ZM20.25 13.55c0-3.02-1.61-4.42-3.76-4.42a3.25 3.25 0 0 0-2.95 1.62h-.04v-2h-3.06V20h3.18v-5.57c0-1.47.28-2.9 2.1-2.9 1.8 0 1.82 1.68 1.82 2.99V20h3.18v-6.45h-.47Z"/>
+  </svg>
+  <div>
+    <span class="contact-label">LinkedIn</span>
+    <strong>Profil Profesional</strong>
+  </div>
+</a>
+
+      <a class="contact-link" href="https://github.com/yourusername" target="_blank" rel="noopener">
+  <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.04 1.53 1.04.89 1.52 2.34 1.08 2.9.82.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.5 9.5 0 0 1 12 6.02c.85 0 1.7.11 2.5.33 1.9-1.29 2.74-1.02 2.74-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.83-2.34 4.67-4.57 4.92.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/>
+  </svg>
+  <div>
+    <span class="contact-label">GitHub</span>
+    <strong>Repository Project</strong>
+  </div>
+</a>
     </div>
-  </section>
+
+    <a class="btn btn-primary reveal" href="mailto:farrel.personal.acc@gmail.com">
+      <i data-lucide="send" width="16" height="16"></i>
+      Kirim Email
+    </a>
+  </div>
+</section>
 
 
   <!-- ============================================================
@@ -1137,64 +1242,59 @@
        JAVASCRIPT
        ============================================================ -->
   <script>
-    // --- Initialize Lucide icons ---
-    lucide.createIcons();
+  // --- Initialize Lucide icons ---
+  window.addEventListener('DOMContentLoaded', () => {
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  });
 
-    // -----------------------------------------------------------------
-    // MOBILE MENU TOGGLE
-    // -----------------------------------------------------------------
-    const hamburger = document.getElementById('hamburger');
-    const navLinks  = document.getElementById('navLinks');
+  // MOBILE MENU TOGGLE
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('navLinks');
 
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
     });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -60px 0px'
+  });
 
-    // Close menu when a link is clicked
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => navLinks.classList.remove('open'));
+  revealEls.forEach(el => observer.observe(el));
+
+  const sections  = document.querySelectorAll('section[id]');
+  const navAnchors = document.querySelectorAll('.nav-links a');
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navAnchors.forEach(a => {
+          a.style.color = a.getAttribute('href') === `#${id}`
+            ? 'var(--accent)'
+            : '';
+        });
+      }
     });
+  }, { threshold: 0.4 });
 
-    // -----------------------------------------------------------------
-    // SCROLL REVEAL — uses IntersectionObserver for performance
-    // -----------------------------------------------------------------
-    const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // animate once only
-        }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -60px 0px'
-    });
-
-    revealEls.forEach(el => observer.observe(el));
-
-    // -----------------------------------------------------------------
-    // ACTIVE NAV LINK on scroll (highlights current section)
-    // -----------------------------------------------------------------
-    const sections  = document.querySelectorAll('section[id]');
-    const navAnchors = document.querySelectorAll('.nav-links a');
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('id');
-          navAnchors.forEach(a => {
-            a.style.color = a.getAttribute('href') === `#${id}`
-              ? 'var(--cyan)'
-              : '';
-          });
-        }
-      });
-    }, { threshold: 0.4 });
-
-    sections.forEach(s => sectionObserver.observe(s));
-  </script>
+  sections.forEach(s => sectionObserver.observe(s));
+</script>
 
 </body>
 </html>
